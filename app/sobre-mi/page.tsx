@@ -1,5 +1,8 @@
+"use client";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerGroup";
 import WaveDivider from "@/components/WaveDivider";
@@ -12,6 +15,10 @@ const formations = [
 ];
 
 export default function SobreMiPage() {
+  const philosophyRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: philProgress } = useScroll({ target: philosophyRef, offset: ["start end", "end start"] });
+  const philBgY = useTransform(philProgress, [0, 1], ["-15%", "15%"]);
+
   return (
     <>
       {/* S1 — Hero */}
@@ -100,17 +107,21 @@ export default function SobreMiPage() {
         </div>
       </section>
 
-      {/* S4 — Philosophy (Yellow, centered quote) */}
-      <WaveDivider fillColor="#f5dd7a" />
-      <section className="section-padding" style={{ backgroundColor: "#f5dd7a" }}>
-        <div className="container-custom">
-          <div className="max-w-[720px] mx-auto text-center">
+      {/* S4 — Philosophy (Parallax forest bg + quote) */}
+      <section ref={philosophyRef} className="relative overflow-hidden" style={{ minHeight: "440px", display: "flex", alignItems: "center" }}>
+        <motion.div style={{ y: philBgY }} className="absolute inset-0 -top-[15%] h-[130%]">
+          <Image src="/images/bg/forest-path.jpg" alt="" fill style={{ objectFit: "cover", objectPosition: "center 40%" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,26,26,0.72) 0%, rgba(26,26,26,0.55) 100%)" }} />
+        </motion.div>
+        <div className="relative z-10 w-full py-28 px-6">
+          <div style={{ maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
             <RevealOnScroll variant="scaleReveal">
-              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#78716c", marginBottom: "24px" }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c6b8e8", marginBottom: "24px" }}>
                 Lo que creo
               </p>
-              <blockquote style={{ fontFamily: "Playfair Display, serif", fontStyle: "italic", fontSize: "clamp(1.5rem, 3.5vw, 2.3rem)", color: "#1a1a1a", lineHeight: 1.45 }}>
-                &ldquo;La claridad no se construye — se descubre. Y se descubre notando, no controlando.&rdquo;
+              <blockquote style={{ fontFamily: "Playfair Display, serif", fontStyle: "italic", fontSize: "clamp(1.5rem, 3.5vw, 2.4rem)", color: "#ffffff", lineHeight: 1.5 }}>
+                &ldquo;La claridad no se construye — se descubre.<br />
+                <span style={{ color: "#f5dd7a" }}>Y se descubre notando, no controlando.</span>&rdquo;
               </blockquote>
             </RevealOnScroll>
           </div>

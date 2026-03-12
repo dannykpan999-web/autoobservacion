@@ -15,20 +15,24 @@ const changes = [
 export default function AcercaPage() {
   return (
     <>
-      {/* Page Header */}
-      <section className="pt-36 pb-16 relative overflow-hidden" style={{ backgroundColor: "#f5dd7a" }}>
-        <div className="container-custom text-center">
-          <RevealOnScroll variant="fadeUp">
-            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#78716c", marginBottom: "16px" }}>
-              El proyecto
-            </p>
-            <h1 className="text-display mb-6" style={{ fontFamily: "Playfair Display, serif" }}>
-              Acerca de<br />Autoobservación®
-            </h1>
-            <p style={{ fontFamily: "Nunito, sans-serif", fontWeight: 300, color: "#44403c", fontSize: "18px", maxWidth: "560px", margin: "0 auto" }}>
-              Un espacio de práctica personal, no una metodología ni un sistema. Aquí no hay pasos a seguir — hay invitaciones a notar.
-            </p>
-          </RevealOnScroll>
+      {/* Page Header — woman by window bg */}
+      <section className="relative overflow-hidden" style={{ minHeight: "400px", display: "flex", alignItems: "center" }}>
+        <Image src="/images/bg/woman-window.jpg" alt="" fill style={{ objectFit: "cover", objectPosition: "center 25%" }} priority />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(245,221,122,0.88) 0%, rgba(245,221,122,0.70) 60%, rgba(245,221,122,0.50) 100%)" }} />
+        <div className="relative z-10 w-full py-28 px-6">
+          <div className="container-custom text-center">
+            <RevealOnScroll variant="fadeUp">
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#78716c", marginBottom: "16px" }}>
+                El proyecto
+              </p>
+              <h1 className="text-display mb-6" style={{ fontFamily: "Playfair Display, serif", color: "#1a1a1a" }}>
+                Acerca de<br />Autoobservación®
+              </h1>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontWeight: 300, color: "#44403c", fontSize: "18px", maxWidth: "560px", margin: "0 auto" }}>
+                Un espacio de práctica personal, no una metodología ni un sistema. Aquí no hay pasos a seguir — hay invitaciones a notar.
+              </p>
+            </RevealOnScroll>
+          </div>
         </div>
       </section>
 

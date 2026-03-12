@@ -1,7 +1,8 @@
 "use client";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerGroup";
 import MarqueeStrip from "@/components/MarqueeStrip";
@@ -119,6 +120,13 @@ const card: React.CSSProperties = {
 };
 
 export default function ProgramasOnlinePage() {
+  const agreementRef = useRef<HTMLElement>(null);
+  const inscripcionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: agrProgress } = useScroll({ target: agreementRef, offset: ["start end", "end start"] });
+  const { scrollYProgress: inscProgress } = useScroll({ target: inscripcionRef, offset: ["start end", "end start"] });
+  const agrBgY = useTransform(agrProgress, [0, 1], ["-12%", "12%"]);
+  const inscBgY = useTransform(inscProgress, [0, 1], ["-12%", "12%"]);
+
   return (
     <div>
       {/* HERO */}
@@ -291,8 +299,13 @@ export default function ProgramasOnlinePage() {
         </div>
       </section>
 
-      {/* AGREEMENT */}
-      <section style={{ backgroundColor: "#1a1a1a", padding: "80px 24px" }}>
+      {/* AGREEMENT — parallax forest bg */}
+      <section ref={agreementRef} style={{ position: "relative", overflow: "hidden", padding: "80px 24px" }}>
+        <motion.div style={{ y: agrBgY }} className="absolute inset-0 -top-[12%] h-[124%]">
+          <Image src="/images/bg/forest-path.jpg" alt="" fill style={{ objectFit: "cover", objectPosition: "center" }} />
+          <div className="absolute inset-0" style={{ background: "rgba(26,26,26,0.82)" }} />
+        </motion.div>
+        <div style={{ position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
           <RevealOnScroll variant="scaleReveal">
             <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#d1baaa", marginBottom: "16px" }}>Antes de comenzar</p>
@@ -307,6 +320,7 @@ export default function ProgramasOnlinePage() {
               </p>
             </div>
           </RevealOnScroll>
+        </div>
         </div>
       </section>
 
@@ -371,8 +385,19 @@ export default function ProgramasOnlinePage() {
         </div>
       </section>
 
-      {/* INSCRIPTION CTA */}
-      <section id="inscripcion" style={{ backgroundColor: "#1a1a1a", padding: "100px 24px" }}>
+      {/* INSCRIPTION CTA — parallax candles bg */}
+      <section id="inscripcion" ref={inscripcionRef} style={{ position: "relative", overflow: "hidden", padding: "100px 24px" }}>
+        <motion.div style={{ y: inscBgY }} className="absolute inset-0 -top-[12%] h-[124%]">
+          <Image src="/images/bg/candles-warm.jpg" alt="" fill style={{ objectFit: "cover", objectPosition: "center" }} />
+          <div className="absolute inset-0" style={{ background: "rgba(26,26,26,0.88)" }} />
+          {/* Yellow glow */}
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.12, 0.22, 0.12] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ position: "absolute", width: "500px", height: "500px", borderRadius: "50%", backgroundColor: "#f5dd7a", filter: "blur(100px)", left: "50%", top: "50%", transform: "translate(-50%, -50%)", pointerEvents: "none" }}
+          />
+        </motion.div>
+        <div style={{ position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: "620px", margin: "0 auto", textAlign: "center" }}>
           <RevealOnScroll variant="scaleReveal">
             <span style={{ display: "inline-block", backgroundColor: "#f5dd7a", color: "#1a1a1a", fontSize: "11px", fontFamily: "Nunito, sans-serif", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", padding: "6px 18px", borderRadius: "50px", marginBottom: "28px" }}>Precio de apertura</span>
@@ -401,6 +426,7 @@ export default function ProgramasOnlinePage() {
               Al realizar la compra acepto los Términos y condiciones de Autoobservación®.
             </p>
           </RevealOnScroll>
+        </div>
         </div>
       </section>
     </div>

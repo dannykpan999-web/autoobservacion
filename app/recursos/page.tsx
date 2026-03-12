@@ -6,17 +6,21 @@ import WaveDivider from "@/components/WaveDivider";
 export default function RecursosPage() {
   return (
     <>
-      {/* Page Header */}
-      <section className="pt-36 pb-16" style={{ backgroundColor: "#f7f0ea" }}>
-        <div className="container-custom text-center">
-          <RevealOnScroll variant="fadeUp">
-            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#d1baaa", marginBottom: "16px" }}>
-              Para tu práctica
-            </p>
-            <h1 className="text-display mb-6" style={{ fontFamily: "Playfair Display, serif" }}>
-              Recursos
-            </h1>
-          </RevealOnScroll>
+      {/* Page Header — parallax journal bg */}
+      <section className="relative overflow-hidden" style={{ minHeight: "420px", display: "flex", alignItems: "flex-end" }}>
+        <Image src="/images/bg/notebook-open.jpg" alt="" fill style={{ objectFit: "cover", objectPosition: "center 30%" }} priority />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,26,26,0.80) 0%, rgba(26,26,26,0.25) 60%, rgba(26,26,26,0.1) 100%)" }} />
+        <div className="relative z-10 w-full pb-16 pt-36 px-6">
+          <div className="container-custom text-center">
+            <RevealOnScroll variant="fadeUp">
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c6b8e8", marginBottom: "16px" }}>
+                Para tu práctica
+              </p>
+              <h1 className="text-display mb-6" style={{ fontFamily: "Playfair Display, serif", color: "#ffffff" }}>
+                Recursos
+              </h1>
+            </RevealOnScroll>
+          </div>
         </div>
       </section>
 
