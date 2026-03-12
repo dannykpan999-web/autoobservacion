@@ -45,7 +45,7 @@ export default function FreeAccessBlock() {
 
             {/* CTA */}
             <a
-              href="#"
+              href="/estoy-conmigo"
               className="inline-flex items-center gap-3 glow-pulse rounded-[8px] transition-all duration-300 hover:scale-[1.04]"
               style={{
                 backgroundColor: "#f5dd7a",
